@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Build Your Resume</title>
+  <link rel="stylesheet" href="styles/builder.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <div class="builder">
+    <aside class="input-panel">
+      <h2>Your Info</h2>
+      <input type="text" id="fullName" placeholder="Full Name" />
+      <textarea id="summary" placeholder="Professional Summary"></textarea>
+      <textarea id="skills" placeholder="Skills (comma-separated)"></textarea>
+      <textarea id="experience" placeholder="Experience"></textarea>
+      <textarea id="education" placeholder="Education"></textarea>
+      
+      <div class="template-switch">
+        <label>Template:</label>
+        <select id="templateSelector">
+          <option value="template1">Classic</option>
+          <option value="template2">Modern</option>
+        </select>
+      </div>
+
+      <hr />
+      <h4>Refinement Context</h4>
+      <input type="text" id="jobRole" placeholder="Job Role (e.g. Frontend Developer)" />
+      <input type="text" id="targetCompany" placeholder="Target Company (optional)" />
+      <input type="text" id="preferences" placeholder="Preferences (e.g. highlight leadership)" />
+
+      <div class="actions">
+        <button onclick="refineSection('summary')">Refine Summary ✨</button>
+        <button onclick="refineAll()">Refine All Sections 🚀</button>
+        <button onclick="downloadPDF()">Download PDF 📄</button>
+      </div>
+    </aside>
+
+    <main class="preview-panel">
+      <div id="resumePreview"></div>
+    </main>
+  </div>
+
+<!-- Floating Chatbot Button -->
+<div id="chatbotToggle" style="position:fixed;bottom:20px;right:20px;z-index:1000;">
+  <button style="border-radius:50%;width:60px;height:60px;background:#0056b3;color:#fff;font-size:1.5em;border:none;">💬</button>
+</div>
+
+<!-- Floating Chatbot Window -->
+<div id="chatbotWindow" style="position:fixed;bottom:90px;right:20px;width:300px;height:400px;background:#fff;border:1px solid #ccc;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.2);display:none;z-index:1000;flex-direction:column;overflow:hidden;">
+  <div style="padding:10px;background:#0056b3;color:#fff;font-weight:bold;">Gemini Assistant</div>
+  <div id="chatMessages" style="flex:1;padding:10px;overflow-y:auto;font-size:0.9em;"></div>
+  <div style="display:flex;border-top:1px solid #ccc;">
+    <input id="chatInput" type="text" placeholder="Ask me anything..." style="flex:1;padding:10px;border:none;" />
+    <button id="sendChat" style="padding:10px;background:#0056b3;color:#fff;border:none;">➤</button>
+  </div>
+</div>
+
+  <script src="scripts/templates.js"></script>
+  <script src="scripts/main.js"></script>
+  <script src="scripts/ai.js"></script>
+  <script src="scripts/pdf.js"></script>
+  <script src="scripts/chatbot.js"></script>
+</body>
+</html>

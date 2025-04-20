@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Resume Builder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <div id="landing-page">
+    <header>
+      <h1>Welcome to the Resume Builder</h1>
+      <p>Your AI-powered tool to create professional resumes</p>
+    </header>
+
+    <section id="cta-section">
+      <p>Start creating your resume with ease. Choose a template, input your details, and refine your resume with AI suggestions!</p>
+      <button id="start-btn">Start Building</button>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Resume Builder Tool | All Rights Reserved</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("start-btn").addEventListener("click", () => {
+      window.location.href = "builder.html"; // Navigate to the Resume Builder page
+    });
+  </script>
+</body>
+</html>
