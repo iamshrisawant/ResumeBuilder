@@ -1,0 +1,52 @@
+<div class="resume-template modern" style="display: flex; max-width: 900px; margin: auto; background: #fafafa; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: 'Roboto', sans-serif;">
+  <!-- Sidebar: auto-sizing to content -->
+  <aside style="background: #0056b3; color: #fff; padding: 20px; box-sizing: border-box; flex: 0 0 auto; width: auto; display: flex; flex-direction: column; gap: 20px;">
+    <!-- Name & Role -->
+    <div style="text-align: center;">
+      <h1 style="margin: 0; font-size: 2em;">
+        {{#name}}{{name}}{{/name}}{{^name}}<span style="opacity:0.6; font-style: italic;">Your Name</span>{{/name}}
+      </h1>
+    </div>
+
+    <!-- Contact Info -->
+    {{#contact.email}}<div style="font-size:0.85em;"><strong>Email:</strong> {{contact.email}}</div>{{/contact.email}}
+    {{#contact.phone}}<div style="font-size:0.85em;"><strong>Phone:</strong> {{contact.phone}}</div>{{/contact.phone}}
+    {{#contact.linkedin}}<div style="font-size:0.85em;"><strong>LinkedIn:</strong> {{contact.linkedin}}</div>{{/contact.linkedin}}
+
+    <!-- Skills -->
+    <section>
+      <h3 style="margin-bottom: 8px; font-size: 1em; text-transform: uppercase;">Skills</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+        {{#skills}}<span style="background:#fff; color:#0056b3; padding:4px 8px; border-radius:3px; font-size:0.8em;">{{.}}</span>{{/skills}}
+        {{^skills}}<span style="opacity:0.6; font-style:italic;">No skills provided</span>{{/skills}}
+      </div>
+    </section>
+  </aside>
+
+  <!-- Main Content -->
+  <main style="padding: 25px; flex: 1; box-sizing: border-box;">
+    <!-- Profile Section -->
+    <section style="margin-bottom: 20px;">
+      <h3 style="font-size: 1.2em; color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 4px;">Profile</h3>
+      <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5; color: #333;">
+        {{#summary}}{{summary}}{{/summary}}{{^summary}}<span style="opacity:0.6; font-style:italic;">Add a brief professional summary here.</span>{{/summary}}
+      </p>
+    </section>
+
+    <!-- Experience Section -->
+    <section style="margin-bottom: 20px;">
+      <h3 style="font-size: 1.2em; color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 4px;">Experience</h3>
+      <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5; color: #333;">
+        {{#experience}}{{experience}}{{/experience}}{{^experience}}<span style="opacity:0.6; font-style:italic;">Describe your work experience.</span>{{/experience}}
+      </p>
+    </section>
+
+    <!-- Education Section -->
+    <section>
+      <h3 style="font-size: 1.2em; color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 4px;">Education</h3>
+      <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5; color: #333;">
+        {{#education}}{{education}}{{/education}}{{^education}}<span style="opacity:0.6; font-style:italic;">List your educational background.</span>{{/education}}
+      </p>
+    </section>
+  </main>
+</div>

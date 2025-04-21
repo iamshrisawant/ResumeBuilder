@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Builder</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles/builder.css" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="builder-header">
+    <div class="logo">🚀 ResumeBuilder AI</div>
+    <button id="logoutBtn" class="btn btn-logout">Logout</button>
+  </header>
+
+  <div class="builder">
+    <!-- Sidebar / Input Form -->
+    <aside class="input-panel">
+      <h2>Resume Information</h2>
+
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" placeholder="e.g. Jane Doe" />
+
+      <label for="summary">Professional Summary</label>
+      <textarea id="summary" placeholder="Brief summary of your career"></textarea>
+
+      <label for="skills">Skills (comma separated)</label>
+      <textarea id="skills" placeholder="e.g. JavaScript, React, Node.js"></textarea>
+
+      <label for="experience">Experience</label>
+      <textarea id="experience" placeholder="e.g. Job title, company, dates, achievements"></textarea>
+
+      <label for="education">Education</label>
+      <textarea id="education" placeholder="e.g. Degree, institution, dates"></textarea>
+
+      <label for="certifications">Certifications</label>
+      <textarea id="certifications" placeholder="One per line"></textarea>
+
+      <h3>Contact Information</h3>
+      <label for="contactEmail">Email</label>
+      <input type="email" id="contactEmail" placeholder="e.g. jane.doe@example.com" />
+
+      <label for="contactPhone">Phone</label>
+      <input type="tel" id="contactPhone" placeholder="e.g. (123) 456‑7890" />
+
+      <label for="contactLinkedIn">LinkedIn</label>
+      <input type="url" id="contactLinkedIn" placeholder="e.g. linkedin.com/in/username" />
+
+      <div class="template-switch">
+        <label for="templateSelector">Choose a Template</label>
+        <select id="templateSelector">
+          <option value="template1">Classic</option>
+          <option value="template2">Modern</option>
+        </select>
+      </div>
+
+      <hr/>
+
+      <h3>AI Enhancement</h3>
+      <label for="targetCompany">Target Company</label>
+      <input type="text" id="targetCompany" placeholder="e.g. Google" />
+
+      <label for="preferences">Preferences</label>
+      <input type="text" id="preferences" placeholder="e.g. leadership, creativity" />
+
+      <div class="actions">
+        <button id="refineBtn" class="btn">✨ Refine Summary</button>
+        <button id="downloadBtn" class="btn">📄 Download PDF</button>
+      </div>
+    </aside>
+
+    <!-- Preview Output -->
+    <main class="preview-panel">
+      <div id="resumePreview"></div>
+    </main>
+  </div>
+
+  <!-- Chat Assistant -->
+  <button class="chatbot-btn">
+    <span class="chat-icon">💬</span> Ask Assistant
+  </button>
+
+  <div class="chat-overlay">
+    <div class="chatbot-window">
+      <div class="chatbot-header">
+        Resume Assistant
+        <button class="refresh-btn">Refresh</button>
+        <button class="close-btn">✖</button>
+      </div>
+      <div class="chatbot-content"></div>
+      <div class="chatbot-input">
+        <input type="text" placeholder="Ask me anything...">
+        <button class="send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="scripts/builder.js"></script>
+  <script type="module" src="scripts/main.js"></script>
+  <script src="scripts/pdf.js"></script>
+</body>
+</html>

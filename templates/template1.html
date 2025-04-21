@@ -1,0 +1,74 @@
+<div class="resume-template classic" style="max-width:800px;margin:auto;padding:0;font-family:'Georgia',serif;color:#333;background:#fff;">
+  <header style="text-align:center; padding-top: 0px;"> <!-- Reduced top padding further -->
+    <h1 style="font-size:2.5em;margin-bottom:5px;padding-top:0;">
+      {{#name}}{{name}}{{/name}}
+      {{^name}}<span style="opacity:0.5;font-style:italic;">Your Name Here</span>{{/name}}
+    </h1>
+    <h2 style="font-size:1.5em;color:#555;margin-bottom:15px;">
+    </h2>
+    <p style="font-size:1em;line-height:1.6;">
+      {{#summary}}{{summary}}{{/summary}}
+      {{^summary}}<span style="opacity:0.5;font-style:italic;">A brief professional summary will appear here describing your expertise, achievements, and career goals.</span>{{/summary}}
+    </p>
+  </header>
+
+  <hr style="border:none;height:1px;background:#ddd;margin:20px 0;" /> <!-- Reduced margin for better fit -->
+
+  <section style="margin-bottom:20px;">
+    <h3 style="font-size:1.2em;border-bottom:2px solid #0056b3;display:inline-block;margin-bottom:10px;">Skills</h3>
+    <ul style="list-style:none;padding-left:0;">
+      {{#skills}}
+        <li style="margin-bottom:5px;">• {{.}}</li>
+      {{/skills}}
+      {{^skills}}
+        <li style="opacity:0.5;font-style:italic;">• Sample Skill 1</li>
+        <li style="opacity:0.5;font-style:italic;">• Sample Skill 2</li>
+      {{/skills}}
+    </ul>
+  </section>
+
+  <section style="margin-bottom:20px;">
+    <h3 style="font-size:1.2em;border-bottom:2px solid #0056b3;display:inline-block;margin-bottom:10px;">Experience</h3>
+    <p style="font-size:1em;line-height:1.6;">
+      {{#experience}}{{experience}}{{/experience}}
+      {{^experience}}<span style="opacity:0.5;font-style:italic;">e.g., Software Engineer at XYZ Corp (2020–Present): Developed key features and improved performance by 30%.</span>{{/experience}}
+    </p>
+  </section>
+
+  <section style="margin-bottom:20px;">
+    <h3 style="font-size:1.2em;border-bottom:2px solid #0056b3;display:inline-block;margin-bottom:10px;">Education</h3>
+    <p style="font-size:1em;line-height:1.6;">
+      {{#education}}{{education}}{{/education}}
+      {{^education}}<span style="opacity:0.5;font-style:italic;">e.g., B.S. in Computer Science, ABC University (2016–2020)</span>{{/education}}
+    </p>
+  </section>
+
+  <section style="margin-bottom:20px;">
+    <h3 style="font-size:1.2em;border-bottom:2px solid #0056b3;display:inline-block;margin-bottom:10px;">Certifications</h3>
+    <ul style="list-style:none;padding-left:0;">
+      {{#certifications}}
+        <li style="margin-bottom:5px;">• {{.}}</li>
+      {{/certifications}}
+      {{^certifications}}
+        <li style="opacity:0.5;font-style:italic;">• Example Certification: AWS Certified Solutions Architect</li>
+        <li style="opacity:0.5;font-style:italic;">• Example Certification: Google Analytics Certified</li>
+      {{/certifications}}
+    </ul>
+  </section>
+
+  <section style="margin-bottom:20px;">
+    <h3 style="font-size:1.2em;border-bottom:2px solid #0056b3;display:inline-block;margin-bottom:10px;">Contact Information</h3>
+    <p style="font-size:1em;line-height:1.6;">
+      {{#contact}}
+        <span>Phone: {{phone}}</span><br>
+        <span>Email: {{email}}</span><br>
+        <span>LinkedIn: {{linkedin}}</span>
+      {{/contact}}
+      {{^contact}}
+        <span style="opacity:0.5;font-style:italic;">Phone: (123) 456-7890</span><br>
+        <span style="opacity:0.5;font-style:italic;">Email: example@example.com</span><br>
+        <span style="opacity:0.5;font-style:italic;">LinkedIn: linkedin.com/in/yourprofile</span>
+      {{/contact}}
+    </p>
+  </section>
+</div>
