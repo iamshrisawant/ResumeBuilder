@@ -20,8 +20,8 @@ async function sendToGemini(prompt) {
     // Get the text and strip it down to just content without extra symbols
     const response = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || 'Sorry, no useful response received.';
 
-    // Strip unwanted special characters using regex
-    const cleanedResponse = response.replace(/[^a-zA-Z0-9\s.,;!?()&'-]/g, '');
+    // Strip unwanted special characters using regex, while keeping necessary punctuation
+    const cleanedResponse = response.replace(/[^\w\s.,;!?&'()-]/g, '');
 
     return cleanedResponse;
   } catch (err) {

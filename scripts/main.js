@@ -1,5 +1,5 @@
 import { loadTemplate } from './templates.js';
-import { refineSection, refineAll } from './ai.js';
+import { refineSection, refineAll, getAIResponse } from './ai.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const fields = [
@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const refineSummaryBtn = document.getElementById('refineSummaryBtn');
   const refineAllBtn = document.getElementById('refineAllBtn');
 
+  // Refine Summary Button Event
   if (refineSummaryBtn) {
     refineSummaryBtn.addEventListener('click', async () => {
       const summary = document.getElementById('summary').value;
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Refine All Button Event
   if (refineAllBtn) {
     refineAllBtn.addEventListener('click', async () => {
       const resumeText = `
@@ -69,7 +71,28 @@ LinkedIn: ${document.getElementById('contactLinkedIn').value}
     });
   }
 
-  renderResume(); // Initial draw
+  // Get AI response for extra help (optional)
+  const chatInput = document.querySelector('.chatbot-input input');
+  const sendBtn = document.querySelector('.send-btn');
+  
+  if (sendBtn && chatInput) {
+    sendBtn.addEventListener('click', async () => {
+      const userPrompt = chatInput.value;
+      if (userPrompt.trim()) {
+        sendBtn.innerText = 'Thinking...';
+        sendBtn.disabled = true;
+        
+        const response = await getAIResponse(userPrompt);
+        document.querySelector('.chatbot-content').innerHTML += `<div class="chat-response">${response}</div>`;
+        chatInput.value = '';  // Clear input after response
+        
+        sendBtn.innerText = '➤';
+        sendBtn.disabled = false;
+      }
+    });
+  }
+
+  renderResume(); // Initial render
 });
 
 function renderResume() {
