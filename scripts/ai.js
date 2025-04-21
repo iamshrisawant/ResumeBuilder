@@ -2,61 +2,72 @@ const GEMINI_API_KEY = 'AIzaSyDPW0mBKJlSbgntNJN0G_4NiwoBl0MO9LE';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 /**
- * Internal function to call Gemini API.
- * @param {string} prompt - The prompt to send.
- * @returns {Promise<string>} - Gemini's response.
+ * Calls Gemini API and returns clean text.
+ * @param {string} prompt
+ * @returns {Promise<string>}
  */
 async function sendToGemini(prompt) {
   try {
     const res = await fetch(GEMINI_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }]
-      })
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
     });
 
     const data = await res.json();
-    const response = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || 'Sorry, no useful response received.';
-    return response;
+    const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    return cleanAIResponse(raw);
   } catch (err) {
     console.error('Gemini API Error:', err);
-    return 'Something went wrong. Please try again.';
+    return 'Sorry, something went wrong.';
   }
 }
 
 /**
- * Refines the summary for a specific job and company.
- * @param {string} summaryText - Raw resume summary.
- * @param {string} role - Target job title.
- * @param {string} company - Target company name.
+ * Cleans markdown and special characters often returned by AI.
+ * @param {string} text
+ * @returns {string}
+ */
+function cleanAIResponse(text) {
+  return text
+    .replace(/[\*\_\#\-\>]/g, '') // Remove markdown and bullets
+    .replace(/\n+/g, ' ')             // Remove excessive newlines
+    .trim();
+}
+
+/**
+ * Refines a resume summary for a specific company/role.
+ * @param {string} summaryText
+ * @param {string} role
+ * @param {string} company
  * @returns {Promise<string>}
  */
 async function refineSummary(summaryText, role, company) {
   const prompt = `
-Please refine the following resume summary for a "${role}" position at "${company}". The content should be professional, concise, and tailored to the job. Focus on ATS compatibility, impactful language, and brevity. Only provide the refined summary text without any extra advice, explanations, or special formatting.
+You are a resume assistant. Improve the following resume summary for a job application targeting the role of "${role}" at "${company}".
+Focus on clarity, conciseness, and professional impact. Ensure it's well-structured and suitable to be inserted directly into a resume without additional formatting or symbols.
 
-Summary:
+Here is the original summary:
+"""
 ${summaryText}
+"""
+
+Return only the improved summary text.
   `.trim();
 
-  const refinedResponse = await sendToGemini(prompt);
-
-  const cleanedResponse = refinedResponse
-    .replace(/[\*\*\*\s*]-*[^A-Za-z0-9, ]*/g, '')
-    .replace(/(?:\n|\r|\s\s+)/g, '')
-    .trim();
-
-  return cleanedResponse;
+  return await sendToGemini(prompt);
 }
 
 /**
- * Generic AI response used by chatbot.
- * @param {string} message - User's chatbot prompt.
+ * Handles general chatbot queries.
+ * @param {string} message
  * @returns {Promise<string>}
  */
 async function getAIResponse(message) {
-  return await sendToGemini(message);
+  const prompt = `You are a helpful and knowledgeable resume assistant. Answer the following question clearly and concisely:
+
+${message}`;
+  return await sendToGemini(prompt);
 }
 
 export { refineSummary, getAIResponse };

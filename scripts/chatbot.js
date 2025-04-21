@@ -1,43 +1,36 @@
-import { getAIResponse } from './ai.js';  // Must be exported from ai.js
+import { getAIResponse } from './ai.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const openChatbotBtn = document.querySelector('.chatbot-btn');
-  const chatOverlay = document.querySelector('.chat-overlay');
+  const openBtn = document.querySelector('.chatbot-btn');
+  const overlay = document.querySelector('.chat-overlay');
   const closeBtn = document.querySelector('.close-btn');
   const refreshBtn = document.querySelector('.refresh-btn');
   const sendBtn = document.querySelector('.send-btn');
-  const userInput = document.querySelector('.chatbot-input input');
-  const chatbotContent = document.querySelector('.chatbot-content');
+  const input = document.querySelector('.chatbot-input input');
+  const chatbox = document.querySelector('.chatbot-content');
 
-  if (
-    !openChatbotBtn || !chatOverlay || !closeBtn ||
-    !refreshBtn || !sendBtn || !userInput || !chatbotContent
-  ) {
-    console.warn('Chatbot UI elements not found. Skipping chatbot setup.');
+  if (!openBtn || !overlay || !closeBtn || !refreshBtn || !sendBtn || !input || !chatbox) {
+    console.warn('Chatbot elements missing. Skipping initialization.');
     return;
   }
 
-  // Open chatbot
-  openChatbotBtn.addEventListener('click', () => {
-    chatOverlay.classList.add('active');
-    userInput.focus();
+  openBtn.addEventListener('click', () => {
+    overlay.classList.add('active');
+    input.focus();
   });
 
-  // Close chatbot
   closeBtn.addEventListener('click', () => {
-    chatOverlay.classList.remove('active');
+    overlay.classList.remove('active');
   });
 
-  // Clear chat
   refreshBtn.addEventListener('click', () => {
-    chatbotContent.innerHTML = '';
-    userInput.value = '';
-    userInput.focus();
+    chatbox.innerHTML = '';
+    input.value = '';
+    input.focus();
   });
 
-  // Send message
   sendBtn.addEventListener('click', sendMessage);
-  userInput.addEventListener('keydown', (e) => {
+  input.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
@@ -45,27 +38,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   async function sendMessage() {
-    const message = userInput.value.trim();
+    const message = input.value.trim();
     if (!message) return;
 
-    addMessage(message, 'user');
-    userInput.value = '';
-    userInput.focus();
+    displayMessage(message, 'user');
+    input.value = '';
+    input.focus();
 
     try {
-      const botReply = await getAIResponse(message);
-      addMessage(botReply, 'bot');
+      const reply = await getAIResponse(message);
+      displayMessage(reply, 'bot');
     } catch (err) {
-      console.error('Failed to get AI response:', err);
-      addMessage('Sorry, something went wrong.', 'bot');
+      console.error('AI response failed:', err);
+      displayMessage('Sorry, I couldn’t process that. Try again!', 'bot');
     }
   }
 
-  function addMessage(text, type) {
-    const msgEl = document.createElement('div');
-    msgEl.classList.add(type === 'user' ? 'user-message' : 'bot-message');
-    msgEl.textContent = text;
-    chatbotContent.appendChild(msgEl);
-    chatbotContent.scrollTop = chatbotContent.scrollHeight;
+  function displayMessage(text, type) {
+    const bubble = document.createElement('div');
+    bubble.className = type === 'user' ? 'user-message' : 'bot-message';
+    bubble.textContent = text;
+    chatbox.appendChild(bubble);
+    chatbox.scrollTop = chatbox.scrollHeight;
   }
 });

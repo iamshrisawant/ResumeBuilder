@@ -1,35 +1,37 @@
-/* -----------------------------------
-   RESET & BASE
------------------------------------ */
+/* -----------------------------
+   BASE STYLES
+------------------------------ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   font-family: 'Roboto', sans-serif;
   background: #f9f9f9;
   color: #333;
   line-height: 1.5;
   min-height: 100vh;
-  position: relative;
 }
 
-/* -----------------------------------
-   HEADER BAR
------------------------------------ */
+/* -----------------------------
+   HEADER
+------------------------------ */
 .builder-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #4f46e5;
   color: #fff;
-  padding: 0.75rem 2rem;
+  padding: 1rem 2rem;
 }
+
 .builder-header .logo {
   font-size: 1.5rem;
   font-weight: bold;
 }
+
 .btn-logout {
   background: #e74c3c;
   border: none;
@@ -37,63 +39,77 @@ body {
   border-radius: 6px;
   color: #fff;
   cursor: pointer;
+  font-weight: bold;
 }
 
-/* -----------------------------------
-   BUILDER LAYOUT
------------------------------------ */
+/* -----------------------------
+   LAYOUT
+------------------------------ */
 .builder {
   display: flex;
   max-width: 1200px;
   margin: 2rem auto;
   gap: 2rem;
+  padding: 0 1rem;
 }
 
-/* INPUT PANEL */
 .input-panel {
   flex: 1;
-  max-width: 33%;
+  max-width: 35%;
   background: #fff;
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
 }
+
 .input-panel h2,
 .input-panel h3 {
   color: #4f46e5;
   margin-bottom: 1rem;
 }
+
 .input-panel label {
   display: block;
-  margin: 0.75rem 0 0.25rem;
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
   font-weight: 600;
+  font-size: 0.95rem;
 }
+
 .input-panel input,
 .input-panel select,
 .input-panel textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
+
 .input-panel textarea {
   resize: vertical;
   min-height: 80px;
 }
+
 .input-panel hr {
   margin: 1.5rem 0;
   border: none;
   border-top: 1px solid #eee;
 }
 
-/* ACTION BUTTONS */
+.template-switch {
+  margin-top: 1rem;
+}
+
 .actions {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
+
 .actions .btn {
   background: #4f46e5;
   color: #fff;
@@ -104,11 +120,11 @@ body {
   cursor: pointer;
   transition: background 0.3s;
 }
+
 .actions .btn:hover {
   background: #3730a3;
 }
 
-/* PREVIEW PANEL */
 .preview-panel {
   flex: 2;
   background: #f4f4f4;
@@ -119,34 +135,24 @@ body {
   justify-content: center;
   align-items: flex-start;
 }
+
 #resumePreview {
-  width: 794px;  /* A4 width at 96 DPI */
-  min-height: 1122px; /* A4 height at 96 DPI */
+  width: 794px;
+  min-height: 1122px;
   padding: 2rem;
-  margin: 0 auto;  /* Center the content */
-  background: #fff; /* Background color */
-  box-shadow: none; /* Remove shadow during PDF export */
-  border-radius: 0; /* Ensure sharp edges for clarity */
-  overflow: hidden; /* Prevent any overflow that could cause page splitting */
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.resume-template {
-  padding-top: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  overflow: visible; /* Ensure all content is visible */
-}
-
-
-/* -----------------------------------
-   CHATBOT CTA
------------------------------------ */
+/* -----------------------------
+   CHATBOT
+------------------------------ */
 .chatbot-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 2100;
   background: #4f46e5;
   color: #fff;
   border: none;
@@ -158,59 +164,62 @@ body {
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   font-size: 1rem;
+  z-index: 1000;
 }
-.chatbot-btn .chat-icon {
-  font-size: 1.5rem;
-}
+
 .chatbot-btn:hover {
   background: #3730a3;
 }
 
-/* -----------------------------------
-   CHAT OVERLAY & WINDOW
------------------------------------ */
 .chat-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(4px);
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 999;
 }
+
 .chat-overlay.active {
   display: flex;
 }
 
 .chatbot-window {
-  width: 90%;
-  max-width: 800px;
-  max-height: 80%;
   background: #fff;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  position: relative;
 }
 
 .chatbot-header {
   background: #4f46e5;
   color: #fff;
   padding: 0.75rem 1rem;
-  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-weight: bold;
 }
-.close-btn {
+
+.chatbot-header button {
   background: transparent;
-  border: none;
+  border: 1px solid #fff;
   color: #fff;
-  font-size: 1.2rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
   cursor: pointer;
+  transition: background 0.3s;
+}
+
+.chatbot-header button:hover {
+  background: rgba(255,255,255,0.2);
 }
 
 .chatbot-content {
@@ -220,17 +229,20 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  scroll-behavior: smooth;
 }
 
 .chatbot-input {
   display: flex;
   border-top: 1px solid #eee;
 }
+
 .chatbot-input input {
   flex: 1;
   border: none;
   padding: 0.75rem;
 }
+
 .send-btn {
   background: #4f46e5;
   color: #fff;
@@ -239,34 +251,27 @@ body {
   cursor: pointer;
 }
 
-/* -----------------------------------
-   MESSAGE BUBBLES
------------------------------------ */
 .user-message,
 .bot-message {
-  max-width: fit-content;
+  max-width: 80%;
   padding: 0.5rem 0.75rem;
   border-radius: 12px;
-  overflow-wrap: break-word;
+  background: #f0f0f0;
+  animation: fadeIn 0.3s ease-in;
   word-break: break-word;
-  white-space: pre-wrap;
-  opacity: 0;
-  animation: revealMessage 1s forwards;
 }
 
 .user-message {
   align-self: flex-end;
   background: #e0e7ff;
-  text-align: right;
 }
 
 .bot-message {
   align-self: flex-start;
   background: #f3f4f6;
-  text-align: left;
 }
 
-@keyframes revealMessage {
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -277,43 +282,27 @@ body {
   }
 }
 
-/* -----------------------------------
-   REFRESH BUTTON (MATCHED TO UI)
------------------------------------ */
-.refresh-btn {
-  position: absolute;
-  top: 0.75rem;
-  right: 5.5rem; /* offset further from close button */
-  background: #4f46e5;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  font-size: 0.9rem;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background 0.3s ease;
-  z-index: 10;
-}
-
-.refresh-btn:hover {
-  background: #3730a3;
-}
-
-/* -----------------------------------
-   RESPONSIVE
------------------------------------ */
+/* -----------------------------
+   RESPONSIVE DESIGN
+------------------------------ */
 @media (max-width: 768px) {
   .builder {
     flex-direction: column;
-    gap: 1.5rem;
   }
+
   .input-panel,
   .preview-panel {
+    max-width: 100%;
     width: 100%;
   }
+
   #resumePreview {
-    min-height: 600px;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .chatbot-window {
+    max-width: 90%;
+    max-height: 90vh;
   }
 }

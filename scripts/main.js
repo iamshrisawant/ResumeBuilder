@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'fullName', 'summary', 'skills', 'experience', 'education',
     'certifications', 'contactEmail', 'contactPhone', 'contactLinkedIn'
   ];
+
   const templateSelector = document.getElementById('templateSelector');
+  const refineBtn = document.getElementById('refineBtn');
 
   // Resume input listeners
   fields.forEach(id => {
@@ -19,7 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
     templateSelector.addEventListener('change', renderResume);
   }
 
-  renderResume(); // Initial resume render
+  if (refineBtn) {
+    refineBtn.addEventListener('click', async () => {
+      const summaryField = document.getElementById('summary');
+      const targetCompany = document.getElementById('targetCompany')?.value.trim();
+      const preferences = document.getElementById('preferences')?.value.trim();
+
+      const currentSummary = summaryField?.value.trim();
+      const role = preferences || 'desired role';
+      const company = targetCompany || 'a company';
+
+      if (!currentSummary) {
+        alert('Please enter a summary to refine.');
+        return;
+      }
+
+      try {
+        const refined = await refineSummary(currentSummary, role, company);
+        summaryField.value = refined;
+        renderResume();
+      } catch (err) {
+        console.error('Refinement failed:', err);
+        alert('Failed to refine summary. Please try again later.');
+      }
+    });
+  }
+
+  renderResume(); // Initial render
 });
 
 function renderResume() {
