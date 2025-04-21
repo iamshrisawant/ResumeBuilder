@@ -17,27 +17,12 @@ async function sendToGemini(prompt) {
     });
 
     const data = await res.json();
-    // Get the text and strip it down to just content without extra symbols
     const response = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || 'Sorry, no useful response received.';
-
-    // Strip unwanted special characters using regex, while keeping necessary punctuation
-    const cleanedResponse = response.replace(/[^\w\s.,;!?&'()-]/g, '');
-
-    return cleanedResponse;
+    return response;
   } catch (err) {
     console.error('Gemini API Error:', err);
     return 'Something went wrong. Please try again.';
   }
-}
-
-/**
- * Ask Gemini any question or prompt.
- * @param {string} userPrompt - Natural language input from user.
- * @returns {Promise<string>}
- */
-async function getAIResponse(userPrompt) {
-  const prompt = `You are a helpful AI assistant for resume building and career advice. Respond clearly and concisely to the following user input:\n\n"${userPrompt}"`;
-  return await sendToGemini(prompt);
 }
 
 /**
@@ -49,34 +34,43 @@ async function getAIResponse(userPrompt) {
  */
 async function refineSection(sectionText, role, company) {
   const prompt = `
-Please rewrite the following resume section to be more professional and suitable for a "${role}" position at "${company}". The refined content should be clear, concise, and tailored for the job role without any extra symbols or unrelated text. Focus on ATS compatibility and impactful language.
+Please refine the following resume section for a "${role}" position at "${company}". The content should be professional, concise, and tailored to the job. Focus on ATS compatibility and impactful language. Avoid unnecessary details and explanations.
 
 Section:
 ${sectionText}
   `.trim();
 
-  const refinedContent = await sendToGemini(prompt);
-  return refinedContent; // Return just the refined content, no extra symbols
+  return await sendToGemini(prompt);
 }
 
 /**
- * Refines the full resume content.
+ * Refines the full resume content and returns a labeled block for parsing.
  * @param {string} resumeText - Entire resume as a string.
  * @param {string} role - Target role.
  * @param {string} company - Target company.
- * @returns {Promise<string>}
+ * @returns {Promise<string>} Labeled resume text
  */
 async function refineAll(resumeText, role, company) {
   const prompt = `
-Please refine the following resume for the position of "${role}" at "${company}". 
-Focus on making it professional, concise, and tailored for the role. Avoid any unnecessary symbols or extra information. Ensure the language is impactful and ATS-friendly.
+Refine the following resume for the role of "${role}" at "${company}". Make it concise, impactful, ATS-optimized, and highly tailored to the position.
+
+⚠️ Please format your response **exactly** using these labels:
+Summary:
+Skills:
+Experience:
+Education:
+Certifications:
+Email:
+Phone:
+LinkedIn:
 
 Resume:
 ${resumeText}
+
+Each section should start with its label on a new line followed by the content. Keep skills comma-separated. Keep other sections as plain text. Do not include explanations or commentary.
   `.trim();
 
-  const refinedContent = await sendToGemini(prompt);
-  return refinedContent; // Return just the refined content, no extra symbols
+  return await sendToGemini(prompt);
 }
 
-export { getAIResponse, refineSection, refineAll };
+export { refineSection, refineAll };

@@ -61,9 +61,9 @@ LinkedIn: ${document.getElementById('contactLinkedIn').value}
       refineAllBtn.innerText = 'Refining... 🚀';
       refineAllBtn.disabled = true;
 
-      const refined = await refineAll(resumeText, role, company);
+      const refinedText = await refineAll(resumeText, role, company);
+      const refined = parseRefinedText(refinedText);
 
-      // Assuming refineAll returns a refined resume with summary included
       document.getElementById('summary').value = refined.summary;
       document.getElementById('skills').value = refined.skills;
       document.getElementById('experience').value = refined.experience;
@@ -102,6 +102,46 @@ LinkedIn: ${document.getElementById('contactLinkedIn').value}
 
   renderResume(); // Initial render
 });
+
+// 🔍 Parse labeled refined response
+function parseRefinedText(refinedText) {
+  const sections = {
+    summary: '',
+    skills: '',
+    experience: '',
+    education: '',
+    certifications: '',
+    contactEmail: '',
+    contactPhone: '',
+    contactLinkedIn: ''
+  };
+
+  const sectionRegex = /^(Summary|Skills|Experience|Education|Certifications|Email|Phone|LinkedIn):([\s\S]*?)(?=^\w+:|\s*$)/gm;
+
+  let match;
+  while ((match = sectionRegex.exec(refinedText)) !== null) {
+    const key = match[1].toLowerCase();
+    const value = match[2].trim();
+
+    switch (key) {
+      case 'email':
+      case 'phone':
+      case 'linkedin':
+        sections[`contact${key.charAt(0).toUpperCase() + key.slice(1)}`] = value;
+        break;
+      case 'skills':
+        sections.skills = value.split(',').map(s => s.trim()).filter(Boolean).join(', ');
+        break;
+      case 'certifications':
+        sections.certifications = value.split('\n').map(c => c.trim()).join('\n');
+        break;
+      default:
+        sections[key] = value;
+    }
+  }
+
+  return sections;
+}
 
 function renderResume() {
   const data = {

@@ -1,5 +1,3 @@
-// scripts/chatbot.js
-
 import { getAIResponse } from './ai.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  function sendMessage() {
+  async function sendMessage() {
     const message = userInput.value.trim();
     if (!message) return;
 
@@ -46,8 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     userInput.value = '';
     userInput.focus();
 
-    // Use your AI response method (replace with actual getAIResponse logic)
-    simulateBotReply(message);
+    // Use your AI response method
+    const botReply = await getAIResponse(message);  // Fetch AI response
+    addMessage(botReply, 'bot');
   }
 
   function addMessage(text, type) {
@@ -56,26 +55,5 @@ document.addEventListener('DOMContentLoaded', () => {
     msgEl.textContent = text;
     chatbotContent.appendChild(msgEl);
     chatbotContent.scrollTop = chatbotContent.scrollHeight;
-  }
-
-  function simulateBotReply(userMsg) {
-    // Replace this with actual async call if getAIResponse is implemented
-    setTimeout(() => {
-      const botReply = generateReply(userMsg);
-      addMessage(botReply, 'bot');
-    }, 500);
-  }
-
-  function generateReply(userMsg) {
-    const msg = userMsg.toLowerCase();
-    if (msg.includes('hello') || msg.includes('hi')) {
-      return "Hey there! How can I help you with your resume?";
-    } else if (msg.includes('format')) {
-      return "Sure! I can help you reformat your resume. Which section would you like to work on?";
-    } else if (msg.includes('skills')) {
-      return "Try listing your skills like:\n• JavaScript\n• Python\n• Problem Solving\nWould you like to tailor them to a specific job?";
-    } else {
-      return "Hmm... could you tell me a bit more about what you're trying to do with your resume?";
-    }
   }
 });
