@@ -1,4 +1,4 @@
-import { getAIResponse } from './ai.js';
+import { sendToGemini, constructResumePrompt } from './ai.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const openChatbotBtn = document.querySelector('.chatbot-btn');
@@ -44,8 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     userInput.value = '';
     userInput.focus();
 
-    // Use your AI response method
-    const botReply = await getAIResponse(message);  // Fetch AI response
+    // Use the resume data to create the prompt for the AI
+    const botReply = await sendToGemini(constructResumePrompt()); // Fetch AI response
     addMessage(botReply, 'bot');
   }
 
