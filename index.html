@@ -6,7 +6,7 @@
   <title>ResumeBuilder - AI-Powered Resume Generator</title>
   <link rel="stylesheet" href="styles/main.css" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- For icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body class="landing">
 
@@ -79,7 +79,7 @@
     </div>
   </section>
 
-  <!-- Testimonials Section (Optional) -->
+  <!-- Testimonials Section -->
   <section id="testimonials" class="testimonials">
     <div class="container">
       <h2>🌟 What Our Users Say</h2>
@@ -114,7 +114,21 @@
     </div>
   </footer>
 
-  <!-- Optional: Add scripts -->
+  <!-- Firebase Auth Redirect Logic -->
+  <script type="module">
+    import { auth, onAuthStateChanged } from './scripts/firebase.js';
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Redirect logged-in users to the builder
+        window.location.href = "builder.html";
+      } else {
+        console.log("User not logged in yet.");
+      }
+    });
+  </script>
+
+  <!-- Optional: Your app-specific scripts -->
   <script src="scripts/main.js"></script>
 
 </body>
