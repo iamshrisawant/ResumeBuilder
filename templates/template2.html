@@ -1,25 +1,31 @@
-<div class="resume-template modern" style="display:flex;max-width:900px;margin:auto;background:#fafafa;box-shadow:0 4px 8px rgba(0,0,0,0.1);font-family:'Roboto',sans-serif;">
+<div class="resume-template modern" style="display:flex;max-width:900px;margin:auto;background:#f9f9f9;box-shadow:0 4px 10px rgba(0,0,0,0.08);font-family:'Roboto',sans-serif;">
   <!-- Sidebar -->
-  <aside style="background:#0056b3;color:#fff;padding:30px;width:30%;box-sizing:border-box;">
+  <aside style="background:#003366;color:#fff;padding:30px;width:30%;box-sizing:border-box;">
     <div style="text-align:center;margin-bottom:30px;">
-      <h1 style="font-size:2em;margin-bottom:5px;">
-        {{#name}}{{name}}{{/name}}
-        {{^name}}<span style="opacity:0.5;font-style:italic;">Your Name</span>{{/name}}
+      <h1 style="font-size:1.8em;margin-bottom:5px;">
+        {{#fullName}}{{fullName}}{{/fullName}}
+        {{^fullName}}<span style="opacity:0.5;font-style:italic;">Your Name</span>{{/fullName}}
       </h1>
-      <h2 style="font-size:1.2em;opacity:0.8;">
-        {{#jobRole}}{{jobRole}}{{/jobRole}}
-        {{^jobRole}}<span style="opacity:0.5;font-style:italic;">Desired Role</span>{{/jobRole}}
-      </h2>
     </div>
+
+    <section style="margin-bottom:20px;">
+      <h3 style="font-size:1.1em;text-transform:uppercase;margin-bottom:10px;">Contact</h3>
+      <p style="font-size:0.9em;line-height:1.4;">
+        📧 {{#contactEmail}}{{contactEmail}}{{/contactEmail}}<br/>
+        📞 {{#contactPhone}}{{contactPhone}}{{/contactPhone}}<br/>
+        🔗 <a href="{{contactLinkedIn}}" style="color:#fff;text-decoration:underline;" target="_blank">{{contactLinkedIn}}</a>
+      </p>
+    </section>
+
     <section>
       <h3 style="font-size:1.1em;text-transform:uppercase;margin-bottom:10px;">Skills</h3>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div style="display:flex;flex-wrap:wrap;gap:6px;">
         {{#skills}}
-          <span style="background:#fff;color:#0056b3;padding:6px 10px;border-radius:4px;font-size:0.9em;">{{.}}</span>
+          <span style="background:#fff;color:#003366;padding:5px 8px;border-radius:4px;font-size:0.85em;">{{.}}</span>
         {{/skills}}
         {{^skills}}
-          <span style="opacity:0.5;font-style:italic;">Sample Skill</span>
-          <span style="opacity:0.5;font-style:italic;">Another Skill</span>
+          <span style="opacity:0.5;font-style:italic;">Skill A</span>
+          <span style="opacity:0.5;font-style:italic;">Skill B</span>
         {{/skills}}
       </div>
     </section>
@@ -28,26 +34,34 @@
   <!-- Main content -->
   <main style="padding:30px;width:70%;box-sizing:border-box;">
     <section style="margin-bottom:25px;">
-      <h3 style="font-size:1.2em;color:#0056b3;margin-bottom:8px;">Profile</h3>
+      <h3 style="font-size:1.3em;color:#003366;margin-bottom:8px;">Professional Summary</h3>
       <p style="font-size:1em;line-height:1.6;color:#333;">
         {{#summary}}{{summary}}{{/summary}}
-        {{^summary}}<span style="opacity:0.5;font-style:italic;">A short summary about your professional background and goals.</span>{{/summary}}
+        {{^summary}}<span style="opacity:0.5;font-style:italic;">Brief overview of your expertise, achievements, and goals.</span>{{/summary}}
       </p>
     </section>
 
     <section style="margin-bottom:25px;">
-      <h3 style="font-size:1.2em;color:#0056b3;margin-bottom:8px;">Experience</h3>
+      <h3 style="font-size:1.3em;color:#003366;margin-bottom:8px;">Experience</h3>
       <p style="font-size:1em;line-height:1.6;color:#333;">
         {{#experience}}{{experience}}{{/experience}}
-        {{^experience}}<span style="opacity:0.5;font-style:italic;">e.g., Led development of key features at XYZ Corp, improving user engagement.</span>{{/experience}}
+        {{^experience}}<span style="opacity:0.5;font-style:italic;">e.g., Software Developer at XYZ Company, 2020–2023</span>{{/experience}}
       </p>
     </section>
 
     <section style="margin-bottom:25px;">
-      <h3 style="font-size:1.2em;color:#0056b3;margin-bottom:8px;">Education</h3>
+      <h3 style="font-size:1.3em;color:#003366;margin-bottom:8px;">Education</h3>
       <p style="font-size:1em;line-height:1.6;color:#333;">
         {{#education}}{{education}}{{/education}}
-        {{^education}}<span style="opacity:0.5;font-style:italic;">e.g., B.A. in Marketing from ABC University (2018–2022)</span>{{/education}}
+        {{^education}}<span style="opacity:0.5;font-style:italic;">e.g., B.Tech in Computer Science, ABC University, 2016–2020</span>{{/education}}
+      </p>
+    </section>
+
+    <section style="margin-bottom:25px;">
+      <h3 style="font-size:1.3em;color:#003366;margin-bottom:8px;">Certifications</h3>
+      <p style="font-size:1em;line-height:1.6;color:#333;">
+        {{#certifications}}{{certifications}}{{/certifications}}
+        {{^certifications}}<span style="opacity:0.5;font-style:italic;">e.g., AWS Certified Solutions Architect, PMP</span>{{/certifications}}
       </p>
     </section>
   </main>
