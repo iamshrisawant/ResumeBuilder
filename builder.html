@@ -86,29 +86,27 @@
     </main>
   </div>
 
-  <!-- Chatbot CTA -->
-  <button class="chatbot-btn">
-    <span class="chat-icon">💬</span>
-    <span class="chat-text">Chat with AI</span>
-  </button>
+  <!-- Chatbot Toggle Button -->
+<button class="chatbot-btn">
+  <span class="chat-icon">💬</span> Ask Assistant
+</button>
 
-  <!-- Chat Overlay & Window -->
-  <div class="chat-overlay">
-    <div class="chatbot-window">
-      <div class="chatbot-header">
-        <span>Gemini Assistant</span>
-        <div class="chatbot-controls">
-          <button class="refresh-btn" title="Clear chat">Refresh</button>
-          <button class="close-btn" title="Close">✕</button>
-        </div>
-      </div>
-      <div class="chatbot-content"></div>
-      <div class="chatbot-input">
-        <input type="text" placeholder="Ask me anything…" />
-        <button class="send-btn">➤</button>
-      </div>
+<!-- Chatbot Overlay -->
+<div class="chat-overlay">
+  <div class="chatbot-window">
+    <div class="chatbot-header">
+      Resume Assistant
+      <button class="refresh-btn">Refresh</button>
+      <button class="close-btn">✖</button>
+    </div>
+    <div class="chatbot-content"></div>
+    <div class="chatbot-input">
+      <input type="text" placeholder="Ask me anything..." />
+      <button class="send-btn">Send</button>
     </div>
   </div>
+</div>
+
 
   <!-- Scripts -->
   <script type="module" src="scripts/main.js"></script>
