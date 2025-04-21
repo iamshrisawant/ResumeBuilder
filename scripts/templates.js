@@ -1,4 +1,3 @@
-// scripts/templates.js
 export function loadTemplate(templateName, data) {
   fetch(`templates/${templateName}.html`)
     .then(res => {
