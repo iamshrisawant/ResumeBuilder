@@ -40,10 +40,10 @@ Summary:
 ${summaryText}
   `.trim();
 
-  // Send prompt to Gemini and return its refined response
+
   const refinedResponse = await sendToGemini(prompt);
 
-  // Cleanup the response: remove any special symbols or commentary
+
   const cleanedResponse = refinedResponse
     .replace(/[\*\*\*\s*]-*[^A-Za-z0-9, ]*/g, '')  // Strip special symbols, markdown, etc.
     .replace(/(?:\n|\r|\s\s+)/g, '') // Remove excessive whitespace and new lines
