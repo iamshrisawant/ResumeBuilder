@@ -1,52 +1,78 @@
-<div class="resume-template modern" style="display: flex; max-width: 900px; margin: auto; background: #fafafa; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-family: 'Roboto', sans-serif;">
-  <!-- Sidebar: auto-sizing to content -->
-  <aside style="background: #0056b3; color: #fff; padding: 20px; box-sizing: border-box; flex: 0 0 auto; width: auto; display: flex; flex-direction: column; gap: 20px;">
-    <!-- Name & Role -->
-    <div style="text-align: center;">
-      <h1 style="margin: 0; font-size: 2em;">
-        {{#name}}{{name}}{{/name}}{{^name}}<span style="opacity:0.6; font-style: italic;">Your Name</span>{{/name}}
+<div class="resume-template modern" style="max-width:960px;margin:auto;background:#fdfdfd;box-shadow:0 4px 12px rgba(0,0,0,0.1);font-family:'Roboto',sans-serif;display:flex;flex-wrap:wrap;">
+  
+  <!-- Sidebar -->
+  <aside style="background-color:#002f6c;color:white;padding:30px;width:100%;max-width:300px;flex-shrink:0;box-sizing:border-box;">
+    <!-- Name -->
+    <div style="text-align:center;margin-bottom:30px;">
+      <h1 style="font-size:1.8em;margin:0;">
+        {{#fullName}}{{fullName}}{{/fullName}}
+        {{^fullName}}<span style="opacity:0.6;font-style:italic;">Your Name</span>{{/fullName}}
       </h1>
     </div>
 
-    <!-- Contact Info -->
-    {{#contact.email}}<div style="font-size:0.85em;"><strong>Email:</strong> {{contact.email}}</div>{{/contact.email}}
-    {{#contact.phone}}<div style="font-size:0.85em;"><strong>Phone:</strong> {{contact.phone}}</div>{{/contact.phone}}
-    {{#contact.linkedin}}<div style="font-size:0.85em;"><strong>LinkedIn:</strong> {{contact.linkedin}}</div>{{/contact.linkedin}}
+    <!-- Contact -->
+    <section style="margin-bottom:30px;">
+      <h3 style="font-size:1em;text-transform:uppercase;margin-bottom:10px;">Contact</h3>
+      <p style="font-size:0.9em;line-height:1.5;">
+        📧 {{#contactEmail}}{{contactEmail}}{{/contactEmail}}<br/>
+        📞 {{#contactPhone}}{{contactPhone}}{{/contactPhone}}<br/>
+        🔗 <a href="{{contactLinkedIn}}" style="color:#fff;text-decoration:underline;" target="_blank">{{contactLinkedIn}}</a>
+      </p>
+    </section>
 
     <!-- Skills -->
     <section>
-      <h3 style="margin-bottom: 8px; font-size: 1em; text-transform: uppercase;">Skills</h3>
-      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-        {{#skills}}<span style="background:#fff; color:#0056b3; padding:4px 8px; border-radius:3px; font-size:0.8em;">{{.}}</span>{{/skills}}
-        {{^skills}}<span style="opacity:0.6; font-style:italic;">No skills provided</span>{{/skills}}
-      </div>
+      <h3 style="font-size:1em;text-transform:uppercase;margin-bottom:10px;">Skills</h3>
+      <ul style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px;">
+        {{#skills}}
+          <li style="background:#fff;color:#002f6c;padding:5px 10px;border-radius:4px;font-size:0.85em;">{{.}}</li>
+        {{/skills}}
+        {{^skills}}
+          <li style="opacity:0.5;font-style:italic;">Skill 1</li>
+          <li style="opacity:0.5;font-style:italic;">Skill 2</li>
+        {{/skills}}
+      </ul>
     </section>
   </aside>
 
   <!-- Main Content -->
-  <main style="padding: 25px; flex: 1; box-sizing: border-box;">
-    <!-- Profile Section -->
-    <section style="margin-bottom: 20px;">
-      <h3 style="font-size: 1.2em; color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 4px;">Profile</h3>
-      <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5; color: #333;">
-        {{#summary}}{{summary}}{{/summary}}{{^summary}}<span style="opacity:0.6; font-style:italic;">Add a brief professional summary here.</span>{{/summary}}
+  <main style="padding:30px;flex:1;box-sizing:border-box;">
+    
+    <!-- Summary -->
+    <section style="margin-bottom:30px;">
+      <h2 style="color:#002f6c;font-size:1.4em;margin-bottom:10px;">Professional Summary</h2>
+      <p style="font-size:1em;line-height:1.6;color:#333;">
+        {{#summary}}{{summary}}{{/summary}}
+        {{^summary}}<span style="opacity:0.6;font-style:italic;">Brief overview of your expertise, experience, and goals.</span>{{/summary}}
       </p>
     </section>
 
-    <!-- Experience Section -->
-    <section style="margin-bottom: 20px;">
-      <h3 style="font-size: 1.2em; color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 4px;">Experience</h3>
-      <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5; color: #333;">
-        {{#experience}}{{experience}}{{/experience}}{{^experience}}<span style="opacity:0.6; font-style:italic;">Describe your work experience.</span>{{/experience}}
+    <!-- Experience -->
+    <section style="margin-bottom:30px;">
+      <h2 style="color:#002f6c;font-size:1.4em;margin-bottom:10px;">Experience</h2>
+      <p style="font-size:1em;line-height:1.6;color:#333;">
+        {{#experience}}{{experience}}{{/experience}}
+        {{^experience}}<span style="opacity:0.6;font-style:italic;">e.g., Developer at ABC Corp, 2020–2023</span>{{/experience}}
       </p>
     </section>
 
-    <!-- Education Section -->
+    <!-- Education -->
+    <section style="margin-bottom:30px;">
+      <h2 style="color:#002f6c;font-size:1.4em;margin-bottom:10px;">Education</h2>
+      <p style="font-size:1em;line-height:1.6;color:#333;">
+        {{#education}}{{education}}{{/education}}
+        {{^education}}<span style="opacity:0.6;font-style:italic;">e.g., B.Tech in Computer Science, XYZ University, 2016–2020</span>{{/education}}
+      </p>
+    </section>
+
+    <!-- Certifications -->
     <section>
-      <h3 style="font-size: 1.2em; color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 4px;">Education</h3>
-      <p style="margin-top: 8px; font-size: 0.95em; line-height: 1.5; color: #333;">
-        {{#education}}{{education}}{{/education}}{{^education}}<span style="opacity:0.6; font-style:italic;">List your educational background.</span>{{/education}}
+      <h2 style="color:#002f6c;font-size:1.4em;margin-bottom:10px;">Certifications</h2>
+      <p style="font-size:1em;line-height:1.6;color:#333;">
+        {{#certifications}}{{certifications}}{{/certifications}}
+        {{^certifications}}<span style="opacity:0.6;font-style:italic;">e.g., AWS Certified Solutions Architect, PMP</span>{{/certifications}}
       </p>
     </section>
+
   </main>
 </div>

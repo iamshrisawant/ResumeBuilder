@@ -1,140 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ResumeBuilder - AI-Powered Resume Generator</title>
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles/main.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body class="landing">
-  <!-- Navbar -->
+
+  <!-- Navbar Section -->
   <nav class="navbar">
     <div class="container">
-      <a href="#" class="logo"><i class="fas fa-file-alt"></i> <span>ResumeBuilder</span></a>
+      <a href="#" class="logo">ResumeBuilder</a>
       <ul class="nav-links">
-        <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
-        <li><a href="#how-it-works"><i class="fas fa-cogs"></i> How It Works</a></li>
-        <li><a href="auth.html" class="btn btn-primary"><i class="fas fa-play"></i> Get Started</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="builder.html">Start Building</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <header class="hero">
+  <!-- Hero Section -->
+  <header class="hero center">
     <div class="hero-content">
-      <h1 class="hero-title"><i class="fas fa-rocket"></i> Build Your Perfect Resume</h1>
-      <p class="hero-description">Create a professional, ATS-optimized resume in minutes with smart templates, real-time previews, and AI content suggestions. No design skills needed.</p>
-      <ul class="hero-list">
-        <li><i class="fas fa-brain"></i> Smart AI content suggestions</li>
-        <li><i class="fas fa-search"></i> Optimized for ATS & recruiters</li>
-        <li><i class="fas fa-eye"></i> Live resume preview as you type</li>
-      </ul>
-      <a href="auth.html" class="btn btn-primary hero-cta"><i class="fas fa-sign-in-alt"></i> Get Started</a>
+      <h1 class="hero-title">🚀 Build Your Perfect Resume</h1>
+      <p class="hero-description">Create a stunning resume in minutes with AI assistance and beautiful templates tailored for your dream job.</p>
+      <a href="builder.html" class="btn primary">Start Building</a>
     </div>
+    
   </header>
 
-  <!-- Features -->
+  <!-- Features Section -->
   <section id="features" class="features">
     <div class="container">
-      <h2><i class="fas fa-list"></i> Key Features</h2>
-      <div class="feature-grid">
+      <h2>✨ Features</h2>
+      <div class="cards">
         <div class="card">
-          <div class="card-icon"><i class="fas fa-robot"></i></div>
-          <div class="card-body">
-            <h3 class="card-title">AI-Powered Refinement</h3>
-            <p>Let AI fine-tune your summary and experience for greater clarity and impact.</p>
-          </div>
+          <h3>AI-Powered Refinement</h3>
+          <p>Get smarter summaries, skills, and experience tailored to your dream job.</p>
         </div>
         <div class="card">
-          <div class="card-icon"><i class="fas fa-palette"></i></div>
-          <div class="card-body">
-            <h3 class="card-title">Design Flexibility</h3>
-            <p>Choose from modern or classic layouts and personalize fonts and colors.</p>
-          </div>
+          <h3>Template Switching</h3>
+          <p>Choose between modern and classic styles to suit your professional tone.</p>
         </div>
         <div class="card">
-          <div class="card-icon"><i class="fas fa-file-pdf"></i></div>
-          <div class="card-body">
-            <h3 class="card-title">PDF Export</h3>
-            <p>Generate high-quality, print-ready PDF resumes in one click.</p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-          <div class="card-body">
-            <h3 class="card-title">Save & Share</h3>
-            <p>Securely save your resumes in the cloud and share them with a link.</p>
-          </div>
+          <h3>Live Preview + PDF Export</h3>
+          <p>See your resume in real-time and download it instantly in PDF format.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- How It Works Section -->
   <section id="how-it-works" class="how-it-works">
     <div class="container">
-      <h2><i class="fas fa-cogs"></i> How It Works</h2>
-      <div class="timeline-wrapper">
-        <div class="timeline-line"></div>
-  
-        <div class="timeline-block left">
-          <div class="timeline-content">
-            <h4><i class="fas fa-user-plus"></i> Sign Up</h4>
-            <p>Create your free account and access your dashboard.</p>
-          </div>
+      <h2>🔍 How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <i class="fas fa-pencil-alt fa-3x step-icon"></i>
+          <p>Enter your details and choose a template.</p>
         </div>
-  
-        <div class="timeline-block right">
-          <div class="timeline-content">
-            <h4><i class="fas fa-keyboard"></i> Fill Details</h4>
-            <p>Input your information and choose your resume layout.</p>
-          </div>
+        <div class="step">
+          <i class="fas fa-magic fa-3x step-icon"></i>
+          <p>Use AI to refine your content based on the job you're applying for.</p>
         </div>
-  
-        <div class="timeline-block left">
-          <div class="timeline-content">
-            <h4><i class="fas fa-magic"></i> AI Assistance</h4>
-            <p>Let AI improve your resume content in real-time.</p>
-          </div>
-        </div>
-  
-        <div class="timeline-block right">
-          <div class="timeline-content">
-            <h4><i class="fas fa-download"></i> Download</h4>
-            <p>Export as PDF or share your resume via link.</p>
-          </div>
+        <div class="step">
+          <i class="fas fa-download fa-3x step-icon"></i>
+          <p>Preview your resume, download it, and you're done!</p>
         </div>
       </div>
     </div>
   </section>
-  
 
-  <!-- About -->
-  <section id="about" class="about">
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="testimonials">
     <div class="container">
-      <h2><i class="fas fa-info-circle"></i> About ResumeBuilder</h2>
-      <p>ResumeBuilder AI is a modern solution for job seekers. With automation, simplicity, and beautiful design, it empowers professionals to stand out and get hired—faster.</p>
+      <h2>🌟 What Our Users Say</h2>
+      <div class="testimonials-cards">
+        <div class="testimonial-card">
+          <p>"ResumeBuilder made creating my resume so easy and fast. The AI-powered suggestions really helped me refine my content!"</p>
+          <h4>John Doe</h4>
+          <span>Software Engineer</span>
+        </div>
+        <div class="testimonial-card">
+          <p>"I love the modern templates! My resume looks so professional now, and the real-time preview is fantastic."</p>
+          <h4>Jane Smith</h4>
+          <span>Product Manager</span>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer Section -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 ResumeBuilder. Built with <i class="fas fa-heart"></i> to help you land your dream job.</p>
-      <ul class="footer-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-      </ul>
+      <div class="footer-content">
+        <a href="builder.html" class="btn secondary">Build Your Resume Now</a>
+        <p>&copy; 2025 ResumeBuilder. All rights reserved.</p>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script type="module" src="scripts/main.js"></script>
+  <!-- Firebase Auth Redirect Logic -->
+  <script type="module">
+    import { auth, onAuthStateChanged } from './scripts/firebase.js';
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // Redirect logged-in users to the builder
+        window.location.href = "builder.html";
+      } else {
+        console.log("User not logged in yet.");
+      }
+    });
+  </script>
+
+  <!-- Optional: Your app-specific scripts -->
+  <script src="scripts/main.js"></script>
+
 </body>
 </html>
