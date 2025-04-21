@@ -10,12 +10,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-  <!-- Auth Guard -->
-  <script type="module">
-    import { auth, onAuthStateChanged } from './scripts/firebase.js';
-    onAuthStateChanged(auth, user => { if (!user) location.href = 'auth.html'; });
-  </script>
-
   <!-- Header Bar -->
   <header class="builder-header">
     <div class="logo">🚀 ResumeBuilder AI</div>
@@ -86,78 +80,28 @@
   </div>
 
   <!-- Chatbot Toggle Button -->
-<button class="chatbot-btn">
-  <span class="chat-icon">💬</span> Ask Assistant
-</button>
+  <button class="chatbot-btn">
+    <span class="chat-icon">💬</span> Ask Assistant
+  </button>
 
-<!-- Chatbot Overlay -->
-<div class="chat-overlay">
-  <div class="chatbot-window">
-    <div class="chatbot-header">
-      Resume Assistant
-      <button class="refresh-btn">Refresh</button>
-      <button class="close-btn">✖</button>
-    </div>
-    <div class="chatbot-content"></div>
-    <div class="chatbot-input">
-      <input type="text" placeholder="Ask me anything..." />
-      <button class="send-btn">Send</button>
+  <!-- Chatbot Overlay -->
+  <div class="chat-overlay">
+    <div class="chatbot-window">
+      <div class="chatbot-header">
+        Resume Assistant
+        <button class="refresh-btn">Refresh</button>
+        <button class="close-btn">✖</button>
+      </div>
+      <div class="chatbot-content"></div>
+      <div class="chatbot-input">
+        <input type="text" placeholder="Ask me anything..." />
+        <button class="send-btn">Send</button>
+      </div>
     </div>
   </div>
-</div>
 
-
-  <!-- Scripts -->
+  <!-- External Scripts -->
   <script type="module" src="scripts/main.js"></script>
   <script src="scripts/pdf.js"></script>
-
-  <!-- Logout -->
-  <script type="module">
-    import { auth, signOut } from './scripts/firebase.js';
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-      await signOut(auth);
-      location.href = 'auth.html';
-    });
-  </script>
-
-  <!-- Dynamic Preview Script -->
-  <script type="module">
-    import { templates } from './scripts/templates.js';  // Import templates from external JS
-
-    const resumeData = {
-      fullName: document.getElementById('fullName').value,
-      summary: document.getElementById('summary').value,
-      skills: document.getElementById('skills').value,
-      experience: document.getElementById('experience').value,
-      education: document.getElementById('education').value,
-      certifications: document.getElementById('certifications').value,
-      contactEmail: document.getElementById('contactEmail').value,
-      contactPhone: document.getElementById('contactPhone').value,
-      contactLinkedIn: document.getElementById('contactLinkedIn').value,
-    };
-
-    const resumePreview = document.getElementById('resumePreview');
-    const templateSelector = document.getElementById('templateSelector');
-
-    function renderPreview() {
-      const selectedTemplate = templateSelector.value;
-      const template = templates[selectedTemplate]; // Fetch selected template from templates.js
-      const rendered = Mustache.render(template, resumeData);
-      resumePreview.innerHTML = rendered;
-    }
-
-    templateSelector.addEventListener('change', renderPreview);
-
-    const inputFields = document.querySelectorAll('input, textarea');
-    inputFields.forEach(field => {
-      field.addEventListener('input', () => {
-        resumeData[field.id] = field.value;
-        renderPreview();  // Re-render the preview with updated data
-      });
-    });
-
-    // Initial render of the preview on page load
-    renderPreview();
-  </script>
 </body>
 </html>

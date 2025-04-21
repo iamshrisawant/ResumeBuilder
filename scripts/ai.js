@@ -26,7 +26,7 @@ async function sendToGemini(prompt) {
 }
 
 /**
- * Refines the summary for a specific job and company. Strips additional commentary and special symbols to return only the core summary content.
+ * Refines the summary for a specific job and company.
  * @param {string} summaryText - Raw resume summary.
  * @param {string} role - Target job title.
  * @param {string} company - Target company name.
@@ -40,16 +40,23 @@ Summary:
 ${summaryText}
   `.trim();
 
-
   const refinedResponse = await sendToGemini(prompt);
 
-
   const cleanedResponse = refinedResponse
-    .replace(/[\*\*\*\s*]-*[^A-Za-z0-9, ]*/g, '')  // Strip special symbols, markdown, etc.
-    .replace(/(?:\n|\r|\s\s+)/g, '') // Remove excessive whitespace and new lines
-    .trim(); // Trim leading/trailing spaces
+    .replace(/[\*\*\*\s*]-*[^A-Za-z0-9, ]*/g, '')
+    .replace(/(?:\n|\r|\s\s+)/g, '')
+    .trim();
 
-  return cleanedResponse; // Return only the cleaned summary
+  return cleanedResponse;
 }
 
-export { refineSummary };
+/**
+ * Generic AI response used by chatbot.
+ * @param {string} message - User's chatbot prompt.
+ * @returns {Promise<string>}
+ */
+async function getAIResponse(message) {
+  return await sendToGemini(message);
+}
+
+export { refineSummary, getAIResponse };

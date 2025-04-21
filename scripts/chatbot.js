@@ -1,4 +1,4 @@
-import { getAIResponse } from './ai.js';  // Import your AI response function
+import { getAIResponse } from './ai.js';  // Must be exported from ai.js
 
 document.addEventListener('DOMContentLoaded', () => {
   const openChatbotBtn = document.querySelector('.chatbot-btn');
@@ -9,27 +9,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const userInput = document.querySelector('.chatbot-input input');
   const chatbotContent = document.querySelector('.chatbot-content');
 
+  if (
+    !openChatbotBtn || !chatOverlay || !closeBtn ||
+    !refreshBtn || !sendBtn || !userInput || !chatbotContent
+  ) {
+    console.warn('Chatbot UI elements not found. Skipping chatbot setup.');
+    return;
+  }
+
   // Open chatbot
-  openChatbotBtn?.addEventListener('click', () => {
-    chatOverlay.classList.add('active');  // Ensure 'open' class is added
+  openChatbotBtn.addEventListener('click', () => {
+    chatOverlay.classList.add('active');
     userInput.focus();
   });
 
   // Close chatbot
-  closeBtn?.addEventListener('click', () => {
-    chatOverlay.classList.remove('active');  // Ensure 'open' class is removed
+  closeBtn.addEventListener('click', () => {
+    chatOverlay.classList.remove('active');
   });
 
   // Clear chat
-  refreshBtn?.addEventListener('click', () => {
+  refreshBtn.addEventListener('click', () => {
     chatbotContent.innerHTML = '';
     userInput.value = '';
     userInput.focus();
   });
 
-  // Send message on button click or Enter (without Shift)
-  sendBtn?.addEventListener('click', sendMessage);
-  userInput?.addEventListener('keydown', (e) => {
+  // Send message
+  sendBtn.addEventListener('click', sendMessage);
+  userInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
@@ -44,9 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     userInput.value = '';
     userInput.focus();
 
-    // Use your AI response method
-    const botReply = await getAIResponse(message);  // Fetch AI response
-    addMessage(botReply, 'bot');
+    try {
+      const botReply = await getAIResponse(message);
+      addMessage(botReply, 'bot');
+    } catch (err) {
+      console.error('Failed to get AI response:', err);
+      addMessage('Sorry, something went wrong.', 'bot');
+    }
   }
 
   function addMessage(text, type) {
