@@ -1,6 +1,8 @@
 import { loadTemplate } from './templates.js';
 import { refineSummary } from './ai.js';
 
+import './chatbot.js'; // ✅ This ensures chatbot logic runs
+
 document.addEventListener('DOMContentLoaded', () => {
   const fields = [
     'fullName', 'summary', 'skills', 'experience', 'education',
@@ -8,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   const templateSelector = document.getElementById('templateSelector');
 
-  // Add event listeners for fields to update resume on input
+  // Resume input listeners
   fields.forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', renderResume);
@@ -19,8 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const refineSummaryBtn = document.getElementById('refineSummaryBtn');
-  
-  // Refine Summary Button Event
+
   if (refineSummaryBtn) {
     refineSummaryBtn.addEventListener('click', async () => {
       const summary = document.getElementById('summary').value;
@@ -39,10 +40,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  renderResume(); // Initial render of the resume preview
+  // Chatbot: Toggle open/close/refresh
+  const chatbotBtn = document.querySelector('.chatbot-btn');
+  const chatOverlay = document.querySelector('.chat-overlay');
+  const closeBtn = document.querySelector('.close-btn');
+  const refreshBtn = document.querySelector('.refresh-btn');
+  const chatContent = document.querySelector('.chatbot-content');
+  const chatInput = document.querySelector('.chatbot-input input');
+
+  chatbotBtn?.addEventListener('click', () => {
+    chatOverlay?.classList.add('active');
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    chatOverlay?.classList.remove('active');
+  });
+
+  refreshBtn?.addEventListener('click', () => {
+    if (chatContent) chatContent.innerHTML = '';
+    if (chatInput) chatInput.value = '';
+  });
+
+  renderResume(); // Initial resume render
 });
 
-// Render the resume preview with the updated data
+// Render resume preview
 function renderResume() {
   const data = {
     name:           document.getElementById('fullName')?.value.trim() || '',
@@ -61,5 +83,5 @@ function renderResume() {
   };
 
   const tmpl = document.getElementById('templateSelector')?.value || 'template1';
-  loadTemplate(tmpl, data);  // Load the selected template and pass the resume data
+  loadTemplate(tmpl, data);
 }
