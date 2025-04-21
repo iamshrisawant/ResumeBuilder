@@ -1,3 +1,4 @@
+// scripts/chatbot.js
 import { getAIResponse } from './ai.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,28 +7,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeBtn = document.querySelector('.close-btn');
   const refreshBtn = document.querySelector('.refresh-btn');
   const sendBtn = document.querySelector('.send-btn');
-  const userInput = document.querySelector('.chatbot-input input, .chatbot-input textarea');
+  const userInput = document.querySelector('.chatbot-input input');
   const chatbotContent = document.querySelector('.chatbot-content');
 
-  // Open chatbot
   openChatbotBtn?.addEventListener('click', () => {
     chatOverlay.classList.add('open');
     userInput.focus();
   });
 
-  // Close chatbot
   closeBtn?.addEventListener('click', () => {
     chatOverlay.classList.remove('open');
   });
 
-  // Clear chat
   refreshBtn?.addEventListener('click', () => {
     chatbotContent.innerHTML = '';
     userInput.value = '';
     userInput.focus();
   });
 
-  // Send message on button click or Enter (without Shift)
   sendBtn?.addEventListener('click', sendMessage);
   userInput?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -44,8 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     userInput.value = '';
     userInput.focus();
 
-    // Use your AI response method
-    const botReply = await getAIResponse(message);  // Fetch AI response
+    const botReply = await getAIResponse(message);
     addMessage(botReply, 'bot');
   }
 
