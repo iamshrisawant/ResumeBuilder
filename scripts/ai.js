@@ -1,5 +1,4 @@
 const GEMINI_API_KEY = 'AIzaSyDPW0mBKJlSbgntNJN0G_4NiwoBl0MO9LE'; // Replace with your actual key
-
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 /**
@@ -18,7 +17,13 @@ async function sendToGemini(prompt) {
     });
 
     const data = await res.json();
-    return data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || 'Sorry, no useful response received.';
+    // Get the text and strip it down to just content without extra symbols
+    const response = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || 'Sorry, no useful response received.';
+
+    // Strip unwanted special characters using regex
+    const cleanedResponse = response.replace(/[^a-zA-Z0-9\s.,;!?()&'-]/g, '');
+
+    return cleanedResponse;
   } catch (err) {
     console.error('Gemini API Error:', err);
     return 'Something went wrong. Please try again.';
@@ -51,7 +56,8 @@ Section:
 ${sectionText}
   `.trim();
 
-  return await sendToGemini(prompt);
+  const refinedContent = await sendToGemini(prompt);
+  return refinedContent; // Return just the refined content
 }
 
 /**
@@ -75,7 +81,8 @@ Resume:
 ${resumeText}
   `.trim();
 
-  return await sendToGemini(prompt);
+  const refinedContent = await sendToGemini(prompt);
+  return refinedContent; // Return just the refined content
 }
 
 export { getAIResponse, refineSection, refineAll };
