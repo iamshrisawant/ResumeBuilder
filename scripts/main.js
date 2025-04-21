@@ -45,21 +45,23 @@ document.addEventListener('DOMContentLoaded', () => {
 // Render the resume preview with the updated data
 function renderResume() {
   const data = {
-    name:           document.getElementById('fullName')?.value.trim() || '',
-    summary:        document.getElementById('summary')?.value.trim() || '',
-    skills:         (document.getElementById('skills')?.value || '')
-                      .split(',').map(s => s.trim()).filter(Boolean),
-    experience:     document.getElementById('experience')?.value.trim() || '',
-    education:      document.getElementById('education')?.value.trim() || '',
+    name: document.getElementById('fullName')?.value.trim() || '',
+    summary: document.getElementById('summary')?.value.trim() || '',
+    skills: (document.getElementById('skills')?.value || '')
+      .split(',').map(s => s.trim()).filter(Boolean),
+    experience: document.getElementById('experience')?.value.trim() || '',
+    education: document.getElementById('education')?.value.trim() || '',
     certifications: (document.getElementById('certifications')?.value || '')
-                      .split('\n').map(c => c.trim()).filter(Boolean),
+      .split('\n').map(c => c.trim()).filter(Boolean),
     contact: {
-      email:    document.getElementById('contactEmail')?.value.trim() || '',
-      phone:    document.getElementById('contactPhone')?.value.trim() || '',
+      email: document.getElementById('contactEmail')?.value.trim() || '',
+      phone: document.getElementById('contactPhone')?.value.trim() || '',
       linkedin: document.getElementById('contactLinkedIn')?.value.trim() || ''
     }
   };
 
+  console.log(data); // Log the data being passed into the template
+
   const tmpl = document.getElementById('templateSelector')?.value || 'template1';
-  loadTemplate(tmpl, data);  // Load the selected template and pass the resume data
+  loadTemplate(tmpl, data);
 }
