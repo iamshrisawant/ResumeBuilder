@@ -1,4 +1,4 @@
-const GEMINI_API_KEY = 'AIzaSyDPW0mBKJlSbgntNJN0G_4NiwoBl0MO9LE'; // Replace with your actual key
+const GEMINI_API_KEY = 'AIzaSyDPW0mBKJlSbgntNJN0G_4NiwoBl0MO9LE';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 /**
@@ -46,7 +46,7 @@ ${summaryText}
   // Cleanup the response: remove any special symbols or commentary
   const cleanedResponse = refinedResponse
     .replace(/[\*\*\*\s*]-*[^A-Za-z0-9, ]*/g, '')  // Strip special symbols, markdown, etc.
-    .replace(/(?:\n|\r|\s\s+)/g, ' ') // Remove excessive whitespace and new lines
+    .replace(/(?:\n|\r|\s\s+)/g, '') // Remove excessive whitespace and new lines
     .trim(); // Trim leading/trailing spaces
 
   return cleanedResponse; // Return only the cleaned summary
