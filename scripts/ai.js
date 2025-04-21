@@ -26,51 +26,23 @@ async function sendToGemini(prompt) {
 }
 
 /**
- * Refines a specific resume section for a job and company.
- * @param {string} sectionText - Raw resume section.
+ * Refines the summary for a specific job and company. Do not text anything other than mentioned details.
+ * The response should be a single line of text without any additional formatting or explanations.
+ * @param {string} summaryText - Raw resume summary.
  * @param {string} role - Target job title.
  * @param {string} company - Target company name.
  * @returns {Promise<string>}
  */
-async function refineSection(sectionText, role, company) {
+async function refineSummary(summaryText, role, company) {
   const prompt = `
-Please refine the following resume section for a "${role}" position at "${company}". The content should be professional, concise, and tailored to the job. Focus on ATS compatibility and impactful language. Avoid unnecessary details and explanations.
+Please refine the following resume summary for a "${role}" position at "${company}". The content should be professional, concise, and tailored to the job. Focus on ATS compatibility, impactful language, and brevity.
 
-Section:
-${sectionText}
-  `.trim();
-
-  return await sendToGemini(prompt);
-}
-
-/**
- * Refines the full resume content and returns a labeled block for parsing.
- * @param {string} resumeText - Entire resume as a string.
- * @param {string} role - Target role.
- * @param {string} company - Target company.
- * @returns {Promise<string>} Labeled resume text
- */
-async function refineAll(resumeText, role, company) {
-  const prompt = `
-Refine the following resume for the role of "${role}" at "${company}". Make it concise, impactful, ATS-optimized, and highly tailored to the position.
-
-⚠️ Please format your response **exactly** using these labels:
 Summary:
-Skills:
-Experience:
-Education:
-Certifications:
-Email:
-Phone:
-LinkedIn:
-
-Resume:
-${resumeText}
-
-Each section should start with its label on a new line followed by the content. Keep skills comma-separated. Keep other sections as plain text. Do not include explanations or commentary.
+${summaryText}
   `.trim();
 
+  // Send prompt to Gemini and return its refined response
   return await sendToGemini(prompt);
 }
 
-export { refineSection, refineAll };
+export { refineSummary };
