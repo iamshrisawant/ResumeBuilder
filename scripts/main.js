@@ -1,8 +1,7 @@
 import { loadTemplate } from './templates.js';
 import { refineSummary } from './ai.js';
 
-import './chatbot.js'; // ✅ This ensures chatbot logic runs
-
+import './chatbot.js';
 document.addEventListener('DOMContentLoaded', () => {
   const fields = [
     'fullName', 'summary', 'skills', 'experience', 'education',
