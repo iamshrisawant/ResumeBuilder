@@ -179,7 +179,7 @@ body {
   justify-content: center;
   z-index: 2000;
 }
-.chat-overlay.open {
+.chat-overlay.active {
   display: flex;
 }
 

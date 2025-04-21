@@ -21,23 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const refineSummaryBtn = document.getElementById('refineSummaryBtn');
 
-  if (refineSummaryBtn) {
-    refineSummaryBtn.addEventListener('click', async () => {
-      const summary = document.getElementById('summary').value;
-      const role = document.getElementById('preferences')?.value || 'Software Engineer';
-      const company = document.getElementById('targetCompany')?.value || 'Any Company';
-
-      refineSummaryBtn.innerText = 'Refining... ✨';
-      refineSummaryBtn.disabled = true;
-
-      const refined = await refineSummary(summary, role, company);
-      document.getElementById('summary').value = refined;
-
-      refineSummaryBtn.innerText = 'Refine Summary ✨';
-      refineSummaryBtn.disabled = false;
-      renderResume();
-    });
-  }
 
   // Chatbot: Toggle open/close/refresh
   const chatbotBtn = document.querySelector('.chatbot-btn');
