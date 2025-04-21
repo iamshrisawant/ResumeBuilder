@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Open chatbot
   openChatbotBtn?.addEventListener('click', () => {
-    chatOverlay.classList.add('open');  // Ensure 'open' class is added
+    chatOverlay.classList.add('active');  // Ensure 'open' class is added
     userInput.focus();
   });
 
   // Close chatbot
   closeBtn?.addEventListener('click', () => {
-    chatOverlay.classList.remove('open');  // Ensure 'open' class is removed
+    chatOverlay.classList.remove('active');  // Ensure 'open' class is removed
   });
 
   // Clear chat
