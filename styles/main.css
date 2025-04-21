@@ -191,24 +191,26 @@ p {
   color: #555;
 }
 
-/* ===============================
-   HOW IT WORKS
-================================== */
+/* -----------------------------------
+   HOW IT WORKS SECTION
+----------------------------------- */
 .how-it-works {
   padding: 3rem 1rem;
   text-align: center;
+  color: #333; /* Changed text color */
 }
 
 .how-it-works h2 {
   font-size: 2.5rem;
   margin-bottom: 2rem;
+  color: #111; /* Stronger heading color */
 }
 
 .steps {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
   justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .step {
@@ -217,14 +219,13 @@ p {
 }
 
 .step-icon {
-  font-size: 2rem;
   color: #4f46e5;
   margin-bottom: 1rem;
 }
 
 .step p {
   font-size: 1.1rem;
-  color: #444;
+  color: #555; /* Changed from #eee to a readable dark shade */
 }
 
 /* ===============================

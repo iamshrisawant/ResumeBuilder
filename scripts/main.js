@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   const templateSelector = document.getElementById('templateSelector');
 
-  // Add event listeners for fields to update resume on input
   fields.forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', renderResume);
@@ -19,8 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const refineSummaryBtn = document.getElementById('refineSummaryBtn');
-  
-  // Refine Summary Button Event
   if (refineSummaryBtn) {
     refineSummaryBtn.addEventListener('click', async () => {
       const summary = document.getElementById('summary').value;
@@ -39,10 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  renderResume(); // Initial render of the resume preview
+  renderResume(); // Initial render
 });
 
-// Render the resume preview with the updated data
 function renderResume() {
   const data = {
     name:           document.getElementById('fullName')?.value.trim() || '',
@@ -61,5 +57,5 @@ function renderResume() {
   };
 
   const tmpl = document.getElementById('templateSelector')?.value || 'template1';
-  loadTemplate(tmpl, data);  // Load the selected template and pass the resume data
+  loadTemplate(tmpl, data);
 }
