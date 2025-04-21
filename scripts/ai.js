@@ -49,15 +49,14 @@ async function getAIResponse(userPrompt) {
  */
 async function refineSection(sectionText, role, company) {
   const prompt = `
-You are an expert resume writer. Please rewrite the following resume section to better suit a job application for the role of "${role}" at "${company}". 
-Keep it professional, ATS-friendly, and results-oriented.
+Please rewrite the following resume section to be more professional and suitable for a "${role}" position at "${company}". The refined content should be clear, concise, and tailored for the job role without any extra symbols or unrelated text. Focus on ATS compatibility and impactful language.
 
 Section:
 ${sectionText}
   `.trim();
 
   const refinedContent = await sendToGemini(prompt);
-  return refinedContent; // Return just the refined content
+  return refinedContent; // Return just the refined content, no extra symbols
 }
 
 /**
@@ -69,20 +68,15 @@ ${sectionText}
  */
 async function refineAll(resumeText, role, company) {
   const prompt = `
-You are a career assistant AI specializing in resume writing. Improve and refine the following resume for a job as "${role}" at "${company}". 
-
-Focus on:
-- Clarity and conciseness
-- Tailoring for the role
-- Impactful language
-- ATS compatibility
+Please refine the following resume for the position of "${role}" at "${company}". 
+Focus on making it professional, concise, and tailored for the role. Avoid any unnecessary symbols or extra information. Ensure the language is impactful and ATS-friendly.
 
 Resume:
 ${resumeText}
   `.trim();
 
   const refinedContent = await sendToGemini(prompt);
-  return refinedContent; // Return just the refined content
+  return refinedContent; // Return just the refined content, no extra symbols
 }
 
 export { getAIResponse, refineSection, refineAll };
