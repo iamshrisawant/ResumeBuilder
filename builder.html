@@ -123,5 +123,45 @@
       location.href = 'auth.html';
     });
   </script>
+
+  <!-- Dynamic Preview Script -->
+  <script type="module">
+    import { templates } from './scripts/templates.js';  // Import templates from external JS
+
+    const resumeData = {
+      fullName: document.getElementById('fullName').value,
+      summary: document.getElementById('summary').value,
+      skills: document.getElementById('skills').value,
+      experience: document.getElementById('experience').value,
+      education: document.getElementById('education').value,
+      certifications: document.getElementById('certifications').value,
+      contactEmail: document.getElementById('contactEmail').value,
+      contactPhone: document.getElementById('contactPhone').value,
+      contactLinkedIn: document.getElementById('contactLinkedIn').value,
+    };
+
+    const resumePreview = document.getElementById('resumePreview');
+    const templateSelector = document.getElementById('templateSelector');
+
+    function renderPreview() {
+      const selectedTemplate = templateSelector.value;
+      const template = templates[selectedTemplate]; // Fetch selected template from templates.js
+      const rendered = Mustache.render(template, resumeData);
+      resumePreview.innerHTML = rendered;
+    }
+
+    templateSelector.addEventListener('change', renderPreview);
+
+    const inputFields = document.querySelectorAll('input, textarea');
+    inputFields.forEach(field => {
+      field.addEventListener('input', () => {
+        resumeData[field.id] = field.value;
+        renderPreview();  // Re-render the preview with updated data
+      });
+    });
+
+    // Initial render of the preview on page load
+    renderPreview();
+  </script>
 </body>
 </html>
