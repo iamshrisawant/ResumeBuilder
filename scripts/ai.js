@@ -26,42 +26,32 @@ async function sendToGemini(prompt) {
 }
 
 /**
- * Fetch the resume data from builder.html input fields and construct the resume content.
- * @returns {object} - An object containing resume data.
+ * Refines the summary for a specific job and company. Strips additional commentary and special symbols to return only the core summary content.
+ * @param {string} summaryText - Raw resume summary.
+ * @param {string} role - Target job title.
+ * @param {string} company - Target company name.
+ * @returns {Promise<string>}
  */
-function getResumeData() {
-  return {
-    fullName: document.getElementById('fullName').value,
-    summary: document.getElementById('summary').value,
-    skills: document.getElementById('skills').value,
-    experience: document.getElementById('experience').value,
-    education: document.getElementById('education').value,
-    certifications: document.getElementById('certifications').value,
-    contactEmail: document.getElementById('contactEmail').value,
-    contactPhone: document.getElementById('contactPhone').value,
-    contactLinkedIn: document.getElementById('contactLinkedIn').value,
-  };
+async function refineSummary(summaryText, role, company) {
+  const prompt = `
+You are a resume optimization engine.
+
+Refine the following resume summary for a "${role}" position at "${company}". Your output must be concise, formal, and directly usable in a resume. Do not include any preamble, bullet points, formatting, or advice. Only return the rewritten professional summary text.
+
+Input Summary:
+${summaryText}
+`.trim();
+
+  // Send prompt to Gemini and return its refined response
+  const refinedResponse = await sendToGemini(prompt);
+
+  // Cleanup the response: remove any special symbols or commentary
+  const cleanedResponse = refinedResponse
+    .replace(/[\*\*\*\s*]-*[^A-Za-z0-9, ]*/g, '')  // Strip special symbols, markdown, etc.
+    .replace(/(?:\n|\r|\s\s+)/g, ' ') // Remove excessive whitespace and new lines
+    .trim(); // Trim leading/trailing spaces
+
+  return cleanedResponse; // Return only the cleaned summary
 }
 
-/**
- * Constructs a prompt for the AI chatbot using the resume data.
- * @returns {string} - The constructed prompt.
- */
-function constructResumePrompt() {
-  const resumeData = getResumeData();
-  return `
-    I am creating a resume for the position of a software developer. Here is the information:
-
-    Full Name: ${resumeData.fullName}
-    Professional Summary: ${resumeData.summary}
-    Skills: ${resumeData.skills}
-    Experience: ${resumeData.experience}
-    Education: ${resumeData.education}
-    Certifications: ${resumeData.certifications}
-    Contact Info: Email - ${resumeData.contactEmail}, Phone - ${resumeData.contactPhone}, LinkedIn - ${resumeData.contactLinkedIn}
-
-    Can you help me optimize this for a software developer position at a leading tech company?
-  `;
-}
-
-export { sendToGemini, constructResumePrompt };
+export { refineSummary };

@@ -10,13 +10,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
+
   <!-- Auth Guard -->
   <script type="module">
     import { auth, onAuthStateChanged } from './scripts/firebase.js';
     onAuthStateChanged(auth, user => { if (!user) location.href = 'auth.html'; });
   </script>
 
-  <!-- Header Bar -->
+  <!-- Header -->
   <header class="builder-header">
     <div class="logo">🚀 ResumeBuilder AI</div>
     <button id="logoutBtn" class="btn btn-logout">Logout</button>
@@ -24,94 +25,61 @@
 
   <div class="builder">
     <aside class="input-panel">
+      <!-- Form Inputs... -->
       <h2>Your Information</h2>
-
       <label for="fullName">Full Name</label>
       <input type="text" id="fullName" placeholder="e.g. Jane Doe" />
 
       <label for="summary">Professional Summary</label>
       <textarea id="summary" placeholder="Brief summary of your career"></textarea>
 
+      <button id="refineSummaryBtn" class="btn">Refine Summary ✨</button>
+
+      <!-- Other fields... -->
       <label for="skills">Skills</label>
-      <textarea id="skills" placeholder="e.g. JavaScript, React, Node.js"></textarea>
-
+      <textarea id="skills"></textarea>
       <label for="experience">Experience</label>
-      <textarea id="experience" placeholder="Job title, company, dates, bullets"></textarea>
-
+      <textarea id="experience"></textarea>
       <label for="education">Education</label>
-      <textarea id="education" placeholder="Degree, institution, dates"></textarea>
-
+      <textarea id="education"></textarea>
       <label for="certifications">Certifications</label>
-      <textarea id="certifications" placeholder="Certifications separated by line"></textarea>
+      <textarea id="certifications"></textarea>
 
-      <!-- Contact Info Section -->
-      <h3>Contact Information</h3>
-      <label for="contactEmail">Email</label>
-      <input type="email" id="contactEmail" placeholder="e.g. jane.doe@example.com" />
+      <!-- Contact -->
+      <h3>Contact</h3>
+      <input type="email" id="contactEmail" placeholder="Email" />
+      <input type="tel" id="contactPhone" placeholder="Phone" />
+      <input type="url" id="contactLinkedIn" placeholder="LinkedIn" />
 
-      <label for="contactPhone">Phone</label>
-      <input type="tel" id="contactPhone" placeholder="e.g. (123) 456‑7890" />
+      <!-- Template -->
+      <label for="templateSelector">Template</label>
+      <select id="templateSelector">
+        <option value="template1">Classic</option>
+        <option value="template2">Modern</option>
+      </select>
 
-      <label for="contactLinkedIn">LinkedIn</label>
-      <input type="url" id="contactLinkedIn" placeholder="e.g. linkedin.com/in/username" />
+      <!-- AI Context -->
+      <h3>AI Context</h3>
+      <input type="text" id="targetCompany" placeholder="Target Company" />
+      <input type="text" id="preferences" placeholder="Preferences" />
 
-      <!-- Template Switcher -->
-      <div class="template-switch">
-        <label for="templateSelector">Template Style</label>
-        <select id="templateSelector">
-          <option value="template1">Classic</option>
-          <option value="template2">Modern</option>
-        </select>
-      </div>
-
-      <hr/>
-
-      <!-- AI Refinement -->
-      <h3>AI Refinement Context</h3>
-      <label for="targetCompany">Target Company</label>
-      <input type="text" id="targetCompany" placeholder="e.g. Google" />
-
-      <label for="preferences">Preferences</label>
-      <input type="text" id="preferences" placeholder="e.g. leadership, teamwork" />
-
+      <!-- Actions -->
       <div class="actions">
         <button onclick="downloadPDF()" class="btn">Download PDF 📄</button>
       </div>
     </aside>
 
-    <!-- Preview Panel -->
+    <!-- Resume Preview -->
     <main class="preview-panel">
       <div id="resumePreview"></div>
     </main>
   </div>
 
-  <!-- Chatbot CTA -->
-  <button class="chatbot-btn">
-    <span class="chat-icon">💬</span>
-    <span class="chat-text">Chat with AI</span>
-  </button>
-
-  <!-- Chat Overlay & Window -->
-  <div class="chat-overlay">
-    <div class="chatbot-window">
-      <div class="chatbot-header">
-        <span>Gemini Assistant</span>
-        <div class="chatbot-controls">
-          <button class="refresh-btn" title="Clear chat">Refresh</button>
-          <button class="close-btn" title="Close">✕</button>
-        </div>
-      </div>
-      <div class="chatbot-content"></div>
-      <div class="chatbot-input">
-        <input type="text" placeholder="Ask me anything…" />
-        <button class="send-btn">➤</button>
-      </div>
-    </div>
-  </div>
+  <!-- Chatbot, Overlay, etc... -->
 
   <!-- Scripts -->
-  <script type="module" src="scripts/main.js"></script>
   <script src="scripts/pdf.js"></script>
+  <script type="module" src="scripts/builder.js"></script>
   <script type="module" src="scripts/chatbot.js"></script>
 
   <!-- Logout -->
