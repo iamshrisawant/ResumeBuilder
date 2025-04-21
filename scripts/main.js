@@ -63,7 +63,15 @@ LinkedIn: ${document.getElementById('contactLinkedIn').value}
 
       const refined = await refineAll(resumeText, role, company);
 
-      document.getElementById('summary').value = refined;
+      // Assuming refineAll returns a refined resume with summary included
+      document.getElementById('summary').value = refined.summary;
+      document.getElementById('skills').value = refined.skills;
+      document.getElementById('experience').value = refined.experience;
+      document.getElementById('education').value = refined.education;
+      document.getElementById('certifications').value = refined.certifications;
+      document.getElementById('contactEmail').value = refined.contactEmail;
+      document.getElementById('contactPhone').value = refined.contactPhone;
+      document.getElementById('contactLinkedIn').value = refined.contactLinkedIn;
 
       refineAllBtn.innerText = 'Refine All 🚀';
       refineAllBtn.disabled = false;
