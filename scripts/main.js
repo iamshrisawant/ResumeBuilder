@@ -105,19 +105,3 @@ function renderResume() {
 function goToHome() {
   window.location.href = "index.html";
 }
-
-// Handle logout and redirect to index.html
-document.getElementById("logoutBtn").addEventListener("click", () => {
-  // Assuming Firebase Auth is used
-  if (firebase && firebase.auth) {
-    firebase.auth().signOut().then(() => {
-      console.log("User signed out");
-      window.location.href = "index.html";
-    }).catch((error) => {
-      console.error("Logout error:", error);
-    });
-  } else {
-    // Fallback redirect
-    window.location.href = "index.html";
-  }
-});
