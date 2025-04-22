@@ -80,6 +80,7 @@ ul {
   transition: color 0.3s ease;
 }
 
+
 .nav-links a:hover {
   color: #4f46e5;
 }
@@ -148,11 +149,27 @@ ul {
 
 .feature-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;              /* prevent line break */
+  justify-content: space-between; /* spread evenly */
+  overflow-x: auto;               /* allow horizontal scrolling if needed */
   gap: 2rem;
-  justify-content: center;
   margin-top: 2rem;
+  padding-bottom: 1rem;
 }
+
+.feature-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.feature-grid::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.card {
+  flex: 0 0 260px;  /* fix width per card */
+  min-width: 260px;
+}
+
 
 .card {
   background: #ffffff;
@@ -188,88 +205,64 @@ ul {
 }
 
 /* ----------------------
-   HOW IT WORKS - ENHANCED TIMELINE DESIGN
+   HOW IT WORKS - HORIZONTAL STEPS
 ----------------------- */
 .how-it-works {
-  background: #fff;
+  background: #ffffff;
   padding: 4rem 2rem;
   text-align: center;
-  position: relative;
 }
 
 .timeline-horizontal {
-  position: relative;
-  margin-top: 4rem;
-  padding: 2rem 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.timeline-horizontal::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: #e0e7ff;
-  z-index: 1;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
 }
 
 .timeline-step {
-  width: 320px;
   background: #f9fafb;
-  border-left: 6px solid #4f46e5;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  padding: 1.5rem 1.25rem;
-  position: relative;
-  margin: 2rem 0;
-  z-index: 2;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid #4f46e5;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  width: 250px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  flex: 1 1 220px;
+  transition: transform 0.3s ease;
 }
 
 .timeline-step:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transform: translateY(-6px);
 }
 
-.timeline-step:nth-child(odd) {
-  align-self: flex-start;
-  transform: translateY(-60%);
-  text-align: right;
-}
-
-.timeline-step:nth-child(even) {
-  align-self: flex-end;
-  transform: translateY(60%);
-  text-align: left;
+.step-icon {
+  font-size: 2rem;
+  color: #4f46e5;
+  margin-bottom: 1rem;
 }
 
 .timeline-step h4 {
+  font-size: 1.2rem;
   color: #4f46e5;
-  font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
 .timeline-step p {
-  font-size: 1rem;
-  color: #333;
+  font-size: 0.95rem;
+  color: #444;
 }
 
+/* Responsive layout */
 @media (max-width: 768px) {
-  .timeline-horizontal::before {
-    display: none;
+  .timeline-horizontal {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .timeline-step,
-  .timeline-step:nth-child(odd),
-  .timeline-step:nth-child(even) {
-    align-self: center;
-    transform: none;
-    text-align: center;
-    width: 90%;
+  .timeline-step {
+    width: 100%;
+    max-width: 360px;
   }
 }
 
