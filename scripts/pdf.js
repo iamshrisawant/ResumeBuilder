@@ -51,4 +51,6 @@ function downloadPDF() {
         element.style.backgroundColor = original.background;
       });
   }, 100);
+  window.downloadPDF = downloadPDF;
+
 }

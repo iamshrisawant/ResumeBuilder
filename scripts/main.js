@@ -2,6 +2,9 @@ import { loadTemplate } from './templates.js';
 import { refineSummary } from './ai.js';
 import './chatbot.js';
 
+import { auth } from './firebase.js';
+import { signOut } from 'https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const fields = [
     'fullName', 'summary', 'skills', 'experience', 'education',
@@ -10,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const templateSelector = document.getElementById('templateSelector');
   const refineBtn = document.getElementById('refineBtn');
+  const downloadBtn      = document.getElementById('downloadPdfBtn');  // ← added
+  const logoutBtn = document.getElementById('logoutBtn');
+
+
 
   // Resume input listeners
   fields.forEach(id => {
@@ -43,6 +50,29 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.error('Refinement failed:', err);
         alert('Failed to refine summary. Please try again later.');
+      }
+    });
+  }
+
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      if (typeof downloadPDF === 'function') {
+        window.downloadPDF();
+      } else {
+        console.error('downloadPDF() is not defined.');
+      }
+    });
+  }
+
+  // After wiring up refineBtn and downloadBtn, add:
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', async () => {
+      try {
+        await signOut(auth);
+        window.location.href = 'index.html';
+      } catch (err) {
+        console.error('Logout error:', err);
+        alert('Logout failed. Please try again.');
       }
     });
   }
