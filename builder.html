@@ -104,24 +104,23 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script type="module" src="scripts/builder.js"></script>
-  <script type="module" src="scripts/main.js"></script>
-  <script src="scripts/pdf.js"></script>
-  +  <!-- Firebase SDK (for auth/logout) -->
-+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
-+  <script src="scripts/firebase.js" defer></script>
-+
-+  <!-- Chatbot -->
-+  <script src="scripts/chatbot.js" defer></script>
-+
-+  <!-- AI & Templates (ES modules) -->
-+  <script type="module" src="scripts/ai.js" defer></script>
-+  <script type="module" src="scripts/templates.js" defer></script>
-+  <script type="module" src="scripts/main.js" defer></script>
-+
-+  <!-- PDF export (html2pdf already loaded in your <head>) -->
-+  <script src="scripts/pdf.js" defer></script>
+  <!-- Firebase SDK (for auth/logout) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
+<script src="scripts/firebase.js" defer></script>
+
+<!-- Chatbot functionality -->
+<script src="scripts/chatbot.js" defer></script>
+
+<!-- AI and template logic (ES modules) -->
+<script type="module" src="scripts/ai.js" defer></script>
+<script type="module" src="scripts/templates.js" defer></script>
+
+<!-- Main functionality -->
+<script type="module" src="scripts/main.js" defer></script>
+
+<!-- PDF generation logic -->
+<script src="scripts/pdf.js" defer></script>
+
 </body>
 </html>
